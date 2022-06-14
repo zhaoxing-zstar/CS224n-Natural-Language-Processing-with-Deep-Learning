@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="None">
     <link rel="shortcut icon" href="img/favicon.ico">
-    <title>Home &mdash; MKLorum</title>
+    <title>Home &mdash; CS224n</title>
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/fira_code.css">
     <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/all.css">
@@ -27,7 +27,7 @@
             <div class="home">
                 <div class="title">
                     <button class="hamburger"></button>
-                    <a href="." class="site-name"> MKLorum</a>
+                    <a href="." class="site-name"> CS224n</a>
                 </div>
                 <div class="search">
                     <div role="search">
@@ -41,8 +41,8 @@
                 <ul class="root">
                     <li class="toctree-l1 current"><a class="nav-item current" href=".">Home</a>
 <ul class="subnav">
-<li class="toctree-l2"><a class="nav-item toc" href="#commands">Commands</a></li>
-<li class="toctree-l2"><a class="nav-item toc" href="#project-layout">Project layout</a></li>
+<li class="toctree-l2"><a class="nav-item toc" href="#layouts">Layouts</a></li>
+<li class="toctree-l2"><a class="nav-item toc" href="#references">References:</a></li>
 </ul></li>
                     <li class="toctree-l1"><button class="section nav-item">User Guide</button>
 <ul class="subnav">
@@ -51,7 +51,16 @@
     <li class="toctree-l2">
 <a class="nav-item" href="styling-your-docs/">Styling your docs</a></li>
 </ul></li>
+                    <li class="toctree-l1"><button class="section nav-item">Chapters</button>
+<ul class="subnav">
+    <li class="toctree-l2"><a class="nav-item" href="chapters/Word2vec/">Word2vec</a></li>
+</ul></li>
                     <li class="toctree-l1"><a class="nav-item" href="about/">About</a></li>
+                    <li class="toctree-l1"><button class="section nav-item">Assignments</button>
+<ul class="subnav">
+    <li class="toctree-l2">
+<a class="nav-item" href="assignments/a1/exploring_word_vectors.html">Assignment 1</a></li>
+</ul></li>
                 </ul>
             </nav>
             <div class="repo">
@@ -62,7 +71,7 @@
         <main>
             <div class="home-top">
                 <button class="hamburger"></button>
-                <a href="." class="site-name"> MKLorum</a>
+                <a href="." class="site-name"> CS224n</a>
             </div>
             <div id="main">
                 <nav class="breadcrumbs">
@@ -70,21 +79,23 @@
     
 </ul>
 </nav>
-                <div id="content"><h1 id="mk-lorem">MK Lorem</h1>
-<p>For full documentation visit <a href="https://www.mkdocs.org">mkdocs.org</a>.</p>
-<h2 id="commands">Commands</h2>
+                <div id="content"><h1 id="cs224n">CS224n</h1>
+<p>Some of the important concepts, formulas, derivations, assignments, and models encountered during my self-study of <a href="http://web.stanford.edu/class/cs224n/">CS224n: Natural Language Processing with Deep Learning</a> will be recorded here.</p>
+<h2 id="layouts">Layouts</h2>
 <ul>
 <li><code>mkdocs new [dir-name]</code> - Create a new project.</li>
 <li><code>mkdocs serve</code> - Start the live-reloading docs server.</li>
 <li><code>mkdocs build</code> - Build the documentation site.</li>
-<li><code>mkdocs -h</code> - Print help message and exit.</li>
+<li><code>Assignments</code> - five assignments through the course.<ol>
+<li><a href="assignments/a1/exploring_word_vectors.html">Assignment 1 : Introduction to word vectors</a></li>
+</ol>
+</li>
 </ul>
-<h2 id="project-layout">Project layout</h2>
-<pre><code>mkdocs.yml    # The configuration file.
-docs/
-    index.md  # The documentation homepage.
-    ...       # Other markdown pages, images and other files.
-</code></pre></div>
+<h2 id="references">References:</h2>
+<ol>
+<li>Dan Jurafsky and James H. Martin. <a href="https://web.stanford.edu/~jurafsky/slp3/">Speech and Language Processing (3rd ed. draft)</a></li>
+<li>Zhang, Aston and Lipton, Zachary C. and Li, Mu and Smola, Alexander J. <a href="https://zh.d2l.ai/">Dive into Deep Learning</a></li>
+</ol></div>
                 <footer>
     <div class="footer-buttons">
         <div class="next"><a href="writing-your-docs/" title="Writing your docs"><span>Next</span></a></div>
@@ -101,6 +112,9 @@ docs/
     </div>
     <script>var base_url = '.';</script>
     <script src="js/theme.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="javascripts/mathjax.js"></script>
     <script src="search/main.js"></script>
 </body>
 

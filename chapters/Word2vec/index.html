@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../../img/favicon.ico">
+    <title>Word2vec &mdash; CS224n</title>
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/fira_code.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/v4-shims.css">
+    <link rel="stylesheet" href="../../css/theme.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script> 
+</head>
+
+<body ontouchstart="">
+    <div id="container">
+        <aside>
+            <div class="home">
+                <div class="title">
+                    <button class="hamburger"></button>
+                    <a href="../.." class="site-name"> CS224n</a>
+                </div>
+                <div class="search">
+                    <div role="search">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+        <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+    </form>
+</div>
+                </div>
+            </div>
+            <nav class="nav">
+                <ul class="root">
+                    <li class="toctree-l1"><a class="nav-item" href="../..">Home</a></li>
+                    <li class="toctree-l1"><button class="section nav-item">User Guide</button>
+<ul class="subnav">
+    <li class="toctree-l2">
+<a class="nav-item" href="../../writing-your-docs/">Writing your docs</a></li>
+    <li class="toctree-l2">
+<a class="nav-item" href="../../styling-your-docs/">Styling your docs</a></li>
+</ul></li>
+                    <li class="toctree-l1"><button class="section nav-item">Chapters</button>
+<ul class="subnav">
+    <li class="toctree-l2 current"><a class="nav-item current" href="./">Word2vec</a>
+<ul class="subnav">
+<li class="toctree-l3"><a class="nav-item toc" href="#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="nav-item toc" href="#objective-function">Objective Function</a></li>
+</ul></li>
+</ul></li>
+                    <li class="toctree-l1"><a class="nav-item" href="../../about/">About</a></li>
+                    <li class="toctree-l1"><button class="section nav-item">Assignments</button>
+<ul class="subnav">
+    <li class="toctree-l2">
+<a class="nav-item" href="../../assignments/a1/exploring_word_vectors.html">Assignment 1</a></li>
+</ul></li>
+                </ul>
+            </nav>
+            <div class="repo">
+    <div class="previous"><a href="../../styling-your-docs/">&laquo; Previous</a></div>
+    <div class="next"><a href="../../about/">Next &raquo;</a></div>
+</div>
+        </aside>
+        <div id="spacer"><button class="arrow"></button></div>
+        <main>
+            <div class="home-top">
+                <button class="hamburger"></button>
+                <a href="../.." class="site-name"> CS224n</a>
+            </div>
+            <div id="main">
+                <nav class="breadcrumbs">
+<ul>
+    <li>Chapters</li>
+</ul>
+</nav>
+                <div id="content"><h1 id="word2vec">Word2vec</h1>
+<h2 id="introduction">Introduction</h2>
+<p><code>Original Word2vec Paper</code>: <a href="https://arxiv.org/pdf/1301.3781.pdf">Efficient Estimation of Word Representations in
+Vector Space</a><br />
+<code>Overview</code>: <a href="https://myndbook.com/view/4900">https://myndbook.com/view/4900</a></p>
+<p><em><span style="color:blue">Ideas:</span></em> 
+The idea is to design a model whose parameters are the word vectors. Then, train the model on a certain objective. At every iteration
+we run our model, evaluate the errors, and follow an update rule
+that has some notion of penalizing the model parameters that caused
+the error. Thus, we learn our word vectors.</p>
+<p>Word2vec is a software
+package that actually includes :</p>
+<ul>
+<li><strong><em>2 algorithms</em></strong>: continuous bag-of-words (CBOW) and skip-gram.
+CBOW aims to predict a center word from the surrounding context in
+terms of word vectors. Skip-gram does the opposite, and predicts the
+distribution (probability) of context words from a center word.</li>
+<li><strong><em>2 training methods</em></strong>: negative sampling and hierarchical softmax.
+Negative sampling defines an objective by sampling negative examples, while hierarchical softmax defines an objective using an efficient
+tree structure to compute probabilities for all the vocabulary</li>
+</ul>
+<p>A detailed introduction can be found on <a href="https://yunlongs-1253041399.cos.ap-chengdu.myqcloud.com/Books/word2vec-%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3.pdf">word2vec中的数学</a> and <a href="https://arxiv.org/pdf/1411.2738.pdf">word2vec Parameter Learning Explained</a>. Here only shows the derivation from the course under a simplified scenario.</p>
+<h2 id="objective-function">Objective Function</h2>
+<p>For each position <span class="arithmatex">\(t=1,...,T\)</span>, predict context words within a window of fixed size m,
+given center word <span class="arithmatex">\(w_t\)</span>. Data likelihood:
+$$<br />
+\text{Likelihood}=L(\theta)=\prod_{t=1}^{T} \prod_{\substack{m \leq j \leq m \ j \neq 0}} P\left(w_{t+j} \mid w_{t} ; \theta\right)
+$$<br />
+The objective function <span class="arithmatex">\(J(\theta)\)</span> is the (average) negative log likelihood:
+$$
+J(\theta)=-\frac{1}{T} \log L(\theta)=-\frac{1}{T} \sum_{t=1}^{T} \sum_{\substack{m \leq j \leq m \ j \neq 0}} \log P\left(w_{t+j} \mid w_{t} ; \theta\right) 
+$$
+$$
+\text{Minimizing objective function} \Leftrightarrow \text{Maximizing predictive accuracy}
+$$</p>
+<hr />
+<p>Two vectors are used for a word <span class="arithmatex">\(w\)</span>:     1. <span style="color:green"><span class="arithmatex">\(v_w\)</span>:</span> when <span class="arithmatex">\(w\)</span> is a center word.    2. <span style="color:green"><span class="arithmatex">\(u_w\)</span>:</span> when <span class="arithmatex">\(w\)</span> is a context word.<br />
+Then for a center word c and a context word o:
+$$
+P(o \mid c)=\frac{\exp \left(u_{o}^{T} v_{c}\right)}{\sum_{w \in V} \exp \left(u_{w}^{T} v_{c}\right)}
+$$</p>
+<hr />
+<p>Take derivatives to work out the minimum:
+$$
+\begin{aligned}
+\frac{\partial}{\partial v_c}\log{\frac{\exp \left(u_{o}^{T} v_{c}\right)}{\sum_{w \in V} \exp \left(u_{w}^{T} v_{c}\right)}} &amp;= \frac{\partial}{\partial v_c}\log{\exp \left(u_{o}^{T} v_{c}\right)} - \frac{\partial}{\partial v_c}\log{\sum_{w \in V} \exp \left(u_{w}^{T} v_{c}\right)}\\
+&amp;= u_o - \sum_{x \in V}\frac{1}{\sum_{w \in V} \exp \left(u_{w}^{T} v_{c}\right)}\exp \left(u_{x}^{T} v_{c}\right)u_x\\
+&amp;= u_o - \sum_{x \in V}p(x|c)u_x\\
+&amp;= \text{observed - expected}
+\end{aligned}
+$$
+This is just the derivatives for the center vector parameters, and the derivatives for output vector parameters are also needed (they're similar). Then we have derivative w.r.t all parameters and can minimize</p></div>
+                <footer>
+    <div class="footer-buttons">
+        <div class="previous"><a href="../../styling-your-docs/" title="Styling your docs"><span>Previous</span></a></div>
+        <div class="next"><a href="../../about/" title="About"><span>Next</span></a></div>
+    </div>
+    <div class="footer-note">
+        <p>
+            Built with <a href="http://www.mkdocs.org">MkDocs</a> using
+            <a href="https://github.com/daizutabi/mkdocs-ivory">Ivory theme</a>.
+        </p>
+    </div>
+</footer>
+            </div>
+        </main>
+    </div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../javascripts/mathjax.js"></script>
+    <script src="../../search/main.js"></script>
+</body>
+
+</html>
