@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../../../img/favicon.ico">
-    <title>GloVe &mdash; CS224n</title>
+    <title>LSTM &mdash; CS224n</title>
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/fira_code.css">
     <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/all.css">
@@ -42,19 +42,21 @@
                     <li class="toctree-l1"><a class="nav-item" href="../../..">Home</a></li>
                     <li class="toctree-l1"><button class="section nav-item">Chapters</button>
 <ul class="subnav">
-    <li class="toctree-l2 current"><button class="section nav-item">Word Embeddings</button>
-<ul class="subnav">
-    <li class="toctree-l3"><a class="nav-item" href="../Word2vec/">Word2vec</a></li>
-    <li class="toctree-l3 current"><a class="nav-item current" href="./">GloVe</a>
-<ul class="subnav">
-</ul></li>
-</ul></li>
-    <li class="toctree-l2"><button class="section nav-item hide">Language Models</button>
+    <li class="toctree-l2"><button class="section nav-item hide">Word Embeddings</button>
 <ul class="subnav hide">
-    <li class="toctree-l3"><a class="nav-item" href="../../LanguageModels/languageModels/">Language Models</a></li>
-    <li class="toctree-l3"><a class="nav-item" href="../../LanguageModels/RNN/">RNN</a></li>
-    <li class="toctree-l3"><a class="nav-item" href="../../LanguageModels/LSTM/">LSTM</a></li>
-    <li class="toctree-l3"><a class="nav-item" href="../../LanguageModels/Summary/">Summary</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../Embedding/Word2vec/">Word2vec</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../Embedding/GloVe/">GloVe</a></li>
+</ul></li>
+    <li class="toctree-l2 current"><button class="section nav-item">Language Models</button>
+<ul class="subnav">
+    <li class="toctree-l3"><a class="nav-item" href="../languageModels/">Language Models</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../RNN/">RNN</a></li>
+    <li class="toctree-l3 current"><a class="nav-item current" href="./">LSTM</a>
+<ul class="subnav">
+<li class="toctree-l4"><a class="nav-item toc" href="#lstm-equations">LSTM equations</a></li>
+<li class="toctree-l4"><a class="nav-item toc" href="#references">References</a></li>
+</ul></li>
+    <li class="toctree-l3"><a class="nav-item" href="../Summary/">Summary</a></li>
 </ul></li>
 </ul></li>
                     <li class="toctree-l1"><button class="section nav-item">Math</button>
@@ -72,8 +74,8 @@
                 </ul>
             </nav>
             <div class="repo">
-    <div class="previous"><a href="../Word2vec/">&laquo; Previous</a></div>
-    <div class="next"><a href="../../LanguageModels/languageModels/">Next &raquo;</a></div>
+    <div class="previous"><a href="../RNN/">&laquo; Previous</a></div>
+    <div class="next"><a href="../Summary/">Next &raquo;</a></div>
 </div>
         </aside>
         <div id="spacer"><button class="arrow"></button></div>
@@ -85,21 +87,24 @@
             <div id="main">
                 <nav class="breadcrumbs">
 <ul>
-    <li>Chapters &raquo; </li><li>Word Embeddings</li>
+    <li>Chapters &raquo; </li><li>Language Models</li>
 </ul>
 </nav>
-                <div id="content"><h1 id="global-vectors-for-word-representation-glove">Global Vectors for Word Representation (GloVe)</h1>
-<p><img alt="Count_based_vs_prediction" src="../../imgs/countBase_prediction.png" style="height:500px;width:900px;align:center" /></p>
-<p><code>Original GloVe paper</code>: <a href="https://nlp.stanford.edu/pubs/glove.pdf">GloVe: Global Vectors for Word Representation</a><br />
-GloVe consists of a weighted least squares model that trains on global word-word co-occurrence counts and thus makes efficient use of statistics. The model produces a word vector space with meaningful sub-structure.</p>
-<p><span style="color:red">Crucial Insight:</span> Ratios of co-occurrence probabilities can encode meaning components.</p>
-<p>References<br />
-[1]. <a href="http://web.stanford.edu/class/cs224n/readings/cs224n-2019-notes02-wordvecs2.pdf">Word Vectors II: GloVe, Evaluation and Training</a><br />
-[2]. <a href="https://d2l.ai/chapter_natural-language-processing-pretraining/glove.html#skip-gram-with-global-corpus-statistics">Interpreting GloVe model</a></p></div>
+                <div id="content"><h1 id="long-short-term-memory">Long Short-Term Memory</h1>
+<h2 id="lstm-equations">LSTM equations</h2>
+<p>Long Short Term Memory networks – usually just called “LSTMs” – are a special kind of RNN, capable of learning long-term dependencies. They were introduced by Hochreiter &amp; Schmidhuber (1997), and were refined and popularized by many people in following work.1 They work tremendously well on a large variety of problems, and are now widely used.
+<img alt="LSTMgates" src="../../imgs/gate.png" />
+- LSTM is a good default choice (especially if your dadta has particularly long dependencies, or you have lots of training data); Switch to GRUs for speed and fewer parameters.<br />
+- The LSTM architecture makes it easier for the RNN to preserve information over many steps.<br />
+- LSTM doesn't guarantee that there is no vanishing/exploding gradient, but it does provide an easier way for the model to learn long-distance dependencies.<br />
+<img alt="LSTM" src="../../imgs/LSTM.png" style="height:50%;width:50%;align:center" /></p>
+<h2 id="references">References</h2>
+<p>[1]. <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/">http://colah.github.io/posts/2015-08-Understanding-LSTMs/</a><br />
+[2]. <a href="https://www.bioinf.jku.at/publications/older/2604.pdf">LONG SHORT-TERM MEMORY</a></p></div>
                 <footer>
     <div class="footer-buttons">
-        <div class="previous"><a href="../Word2vec/" title="Word2vec"><span>Previous</span></a></div>
-        <div class="next"><a href="../../LanguageModels/languageModels/" title="Language Models"><span>Next</span></a></div>
+        <div class="previous"><a href="../RNN/" title="RNN"><span>Previous</span></a></div>
+        <div class="next"><a href="../Summary/" title="Summary"><span>Next</span></a></div>
     </div>
     <div class="footer-note">
         <p>
