@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <title>Assignment 4 &mdash; CS224n</title>
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/fira_code.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/v4-shims.css">
+    <link rel="stylesheet" href="../../../css/theme.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script> 
+</head>
+
+<body ontouchstart="">
+    <div id="container">
+        <aside>
+            <div class="home">
+                <div class="title">
+                    <button class="hamburger"></button>
+                    <a href="../../.." class="site-name"> CS224n</a>
+                </div>
+                <div class="search">
+                    <div role="search">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+        <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+    </form>
+</div>
+                </div>
+            </div>
+            <nav class="nav">
+                <ul class="root">
+                    <li class="toctree-l1"><a class="nav-item" href="../../..">Home</a></li>
+                    <li class="toctree-l1"><button class="section nav-item">Chapters</button>
+<ul class="subnav">
+    <li class="toctree-l2"><button class="section nav-item hide">Word Embeddings</button>
+<ul class="subnav hide">
+    <li class="toctree-l3"><a class="nav-item" href="../../../chapters/Embedding/Word2vec/">Word2vec</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../../chapters/Embedding/GloVe/">GloVe</a></li>
+</ul></li>
+    <li class="toctree-l2"><button class="section nav-item hide">Language Models</button>
+<ul class="subnav hide">
+    <li class="toctree-l3"><a class="nav-item" href="../../../chapters/LanguageModels/languageModels/">Language Models</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../../chapters/LanguageModels/RNN/">RNN</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../../chapters/LanguageModels/LSTM/">LSTM</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../../chapters/LanguageModels/Summary/">Summary</a></li>
+</ul></li>
+</ul></li>
+                    <li class="toctree-l1"><button class="section nav-item">Math</button>
+<ul class="subnav">
+    <li class="toctree-l2"><a class="nav-item" href="../../../maths/derivatives/">Matrix Derivative</a></li>
+    <li class="toctree-l2"><a class="nav-item" href="../../../maths/SVD/">SVD</a></li>
+</ul></li>
+                    <li class="toctree-l1"><button class="section nav-item">Assignments</button>
+<ul class="subnav">
+    <li class="toctree-l2">
+<a class="nav-item" href="../../a1/exploring_word_vectors.html">Assignment 1</a></li>
+    <li class="toctree-l2"><a class="nav-item" href="../../a2/a2/">Assignment 2</a></li>
+    <li class="toctree-l2"><a class="nav-item" href="../../a3/a3/">Assignment 3</a></li>
+    <li class="toctree-l2 current"><a class="nav-item current" href="./">Assignment 4</a>
+<ul class="subnav">
+<li class="toctree-l3"><a class="nav-item toc" href="#1-neural-machine-translation-with-rnns">1. Neural Machine Translation with RNNs</a></li>
+<li class="toctree-l3"><a class="nav-item toc" href="#2-analyzing-nmt-systems">2. Analyzing NMT Systems</a></li>
+<li class="toctree-l3"><a class="nav-item toc" href="#references">References:</a></li>
+</ul></li>
+</ul></li>
+                </ul>
+            </nav>
+            <div class="repo">
+    <div class="previous"><a href="../../a3/a3/">&laquo; Previous</a></div>
+</div>
+        </aside>
+        <div id="spacer"><button class="arrow"></button></div>
+        <main>
+            <div class="home-top">
+                <button class="hamburger"></button>
+                <a href="../../.." class="site-name"> CS224n</a>
+            </div>
+            <div id="main">
+                <nav class="breadcrumbs">
+<ul>
+    <li>Assignments</li>
+</ul>
+</nav>
+                <div id="content"><h1 id="assignment-4">Assignment 4</h1>
+<p>Handout: <a href="http://web.stanford.edu/class/cs224n/assignments/a4.pdf" target="_blank">CS 224n: Assignment #4</a></p>
+<h2 id="1-neural-machine-translation-with-rnns">1. Neural Machine Translation with RNNs</h2>
+<p>In the first task, a sequence-to-sequence(Seq2Seq) network with attention is built as a Neural Translation (NMT) system for Cherokee to English translation.</p>
+<p><img alt="Seq2Seq_model_with_Multiplicative_Attention" src="../Seq2seq_MulAtt.png" style="height:50%;width:50%;align:center" /></p>
+<p>Training Curves:<br />
+<img alt="loss" src="../train_loss.png" style="height:50%;width:40%;align:center" /><img alt="perplexity" src="../train_perplexity.png" style="height:50%;width:39.5%;align:center" /></p>
+<h3 id="g-generate_sent_masks-functions-in-nmt_modelpy">(g). generate_sent_masks() functions in nmt_model.py</h3>
+<p><code>step()</code> function in nmt_model.py sets <span class="arithmatex">\(e_t\)</span> to <code>-inf</code> where <code>env_masks</code> has 1, so the attention weights will be zero fater softmax function for "pad" embeddings. Only the weights for real tokens in a sequence will be taken into consideration this way.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Set e_t to -inf where enc_masks has 1</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>        <span class="k">if</span> <span class="n">enc_masks</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>            <span class="n">e_t</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">masked_fill_</span><span class="p">(</span><span class="n">enc_masks</span><span class="o">.</span><span class="n">bool</span><span class="p">(),</span> <span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">))</span>
+</code></pre></div>
+<h3 id="h-test-the-model">(h). test the model</h3>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">sh</span> <span class="n">run</span><span class="o">.</span><span class="n">sh</span> <span class="n">test</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="p">(</span><span class="n">Windows</span><span class="p">)</span> <span class="n">run</span><span class="o">.</span><span class="n">bat</span> <span class="n">test</span>
+</code></pre></div>
+The result is:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">Decoding</span><span class="p">:</span> <span class="mi">100</span><span class="o">%|</span><span class="err">██████████████████████████████████████████████████████████████████████████████████████████████████████</span><span class="o">|</span> <span class="mi">1000</span><span class="o">/</span><span class="mi">1000</span> <span class="p">[</span><span class="mi">00</span><span class="p">:</span><span class="mi">56</span><span class="o">&lt;</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">,</span> <span class="mf">17.63</span><span class="n">it</span><span class="o">/</span><span class="n">s</span><span class="p">]</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">Corpus</span> <span class="n">BLEU</span><span class="p">:</span> <span class="mf">12.784050459913443</span>
+</code></pre></div></p>
+<h3 id="i-different-attention">(i). Different Attention</h3>
+<p><strong>dot product attention:</strong> <span class="arithmatex">\(\mathbf{e}_{t,i} = \mathbf{s}^{T}_{t}\mathbf{h}_{i}\)</span><br />
+<strong>multiplicative attention:</strong> <span class="arithmatex">\(\mathbf{e}_{t,i} = \mathbf{s}^{T}_{t}\mathbf{W}\mathbf{h}_{i}\)</span><br />
+<strong>additive attention:</strong> <span class="arithmatex">\(\mathbf{e}_{t,i} = \mathbf{v}^{T}tanh(\mathbf{W}_{1}\mathbf{h}_{i}+ \mathbf{W}_{2}\mathbf{s}_{t})\)</span>  </p>
+<h4 id="1-dot-product-attention-compared-to-multiplicative-attention">1. dot product attention compared to multiplicative attention</h4>
+<table>
+<thead>
+<tr>
+<th>advantage</th>
+<th>disadvantage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Computing faster</td>
+<td>less expressive</td>
+</tr>
+</tbody>
+</table>
+<h4 id="2-additive-attention-compared-to-multiplicative-attention">2. additive attention compared to multiplicative attention</h4>
+<table>
+<thead>
+<tr>
+<th>advantage</th>
+<th>disadvantage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>More versatile</td>
+<td>heavy computing</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-analyzing-nmt-systems">2. Analyzing NMT Systems</h2>
+<p>(a). Cherokee is a ploysynthetic language, and it will make the word vocabulary very large. Modeling at a subword-level is easier.<br />
+(b). The transliterated Cherokee text might be more alignment with morphemic convention.<br />
+(c). Multilingual NMT, with the inductive bias that "the learning signal from one language should benefit the quality of translation to other languages", is a potential remedy.<br />
+(d).<br />
+i. Wrong pronouns. Pronoun construction is insufficient. Adding more layers to final vocabulary projection.<br />
+ii. repeated words. Putting overly high attention on adjective. Changing the attention mechanism might help.<br />
+iii. Less expressive words. Low representational capacity of the model. Adding more layers to the projection layers of the encoder and decoder.  <br />
+(f). <a href="http://web.stanford.edu/class/cs224n/assignments/a4.pdf">Computing the BLEU score</a></p>
+<h2 id="references">References:</h2>
+<p>[1]. <a href="https://aclanthology.org/P02-1040.pdf">BLEU: a Method for Automatic Evaluation of Machine Translation</a><br />
+[2]. <a href="https://arxiv.org/pdf/1409.0473.pdf">NEURAL MACHINE TRANSLATION BY JOINTLY LEARNING TO ALIGN AND TRANSLATE</a><br />
+[3]. <a href="https://distill.pub/2016/augmented-rnns/">Attention and Augmented Recurrent Neural Networks</a></p></div>
+                <footer>
+    <div class="footer-buttons">
+        <div class="previous"><a href="../../a3/a3/" title="Assignment 3"><span>Previous</span></a></div>
+    </div>
+    <div class="footer-note">
+        <p>
+            Built with <a href="http://www.mkdocs.org">MkDocs</a> using
+            <a href="https://github.com/daizutabi/mkdocs-ivory">Ivory theme</a>.
+        </p>
+    </div>
+</footer>
+            </div>
+        </main>
+    </div>
+    <script>var base_url = '../../..';</script>
+    <script src="../../../js/theme.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../../javascripts/mathjax.js"></script>
+    <script src="../../../search/main.js"></script>
+</body>
+
+</html>
