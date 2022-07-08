@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../../img/favicon.ico">
-    <title>SVD &mdash; CS224n</title>
+    <title>Pretraining &mdash; CS224n</title>
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/fira_code.css">
     <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/all.css">
@@ -44,31 +44,32 @@
 <ul class="subnav">
     <li class="toctree-l2"><button class="section nav-item hide">Word Embeddings</button>
 <ul class="subnav hide">
-    <li class="toctree-l3"><a class="nav-item" href="../../chapters/Embedding/Word2vec/">Word2vec</a></li>
-    <li class="toctree-l3"><a class="nav-item" href="../../chapters/Embedding/GloVe/">GloVe</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../Embedding/Word2vec/">Word2vec</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../Embedding/GloVe/">GloVe</a></li>
 </ul></li>
     <li class="toctree-l2"><button class="section nav-item hide">Language Models</button>
 <ul class="subnav hide">
-    <li class="toctree-l3"><a class="nav-item" href="../../chapters/LanguageModels/languageModels/">Language Models</a></li>
-    <li class="toctree-l3"><a class="nav-item" href="../../chapters/LanguageModels/RNN/">RNN</a></li>
-    <li class="toctree-l3"><a class="nav-item" href="../../chapters/LanguageModels/LSTM/">LSTM</a></li>
-    <li class="toctree-l3"><a class="nav-item" href="../../chapters/LanguageModels/Summary/">Summary</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../LanguageModels/languageModels/">Language Models</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../LanguageModels/RNN/">RNN</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../LanguageModels/LSTM/">LSTM</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../LanguageModels/Summary/">Summary</a></li>
 </ul></li>
     <li class="toctree-l2"><button class="section nav-item hide">Neural Machine Translation</button>
 <ul class="subnav hide">
-    <li class="toctree-l3"><a class="nav-item" href="../../chapters/NMT/seq2seq/">Seq2Seq</a></li>
-    <li class="toctree-l3"><a class="nav-item" href="../../chapters/NMT/atten/">Attention</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../NMT/seq2seq/">Seq2Seq</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../NMT/atten/">Attention</a></li>
 </ul></li>
-    <li class="toctree-l2"><a class="nav-item" href="../../chapters/transformer/">Transformers</a></li>
-    <li class="toctree-l2"><a class="nav-item" href="../../chapters/Pretraining/">Pretraining</a></li>
+    <li class="toctree-l2"><a class="nav-item" href="../transformer/">Transformers</a></li>
+    <li class="toctree-l2 current"><a class="nav-item current" href="./">Pretraining</a>
+<ul class="subnav">
+<li class="toctree-l3"><a class="nav-item toc" href="#1-the-pretraining-finetuning-paradigm">1. The Pretraining / Finetuning Paradigm</a></li>
+<li class="toctree-l3"><a class="nav-item toc" href="#2-model-pretraining-three-ways">2. Model Pretraining Three Ways</a></li>
+</ul></li>
 </ul></li>
                     <li class="toctree-l1"><button class="section nav-item">Math</button>
 <ul class="subnav">
-    <li class="toctree-l2"><a class="nav-item" href="../derivatives/">Matrix Derivative</a></li>
-    <li class="toctree-l2 current"><a class="nav-item current" href="./">SVD</a>
-<ul class="subnav">
-<li class="toctree-l3"><a class="nav-item toc" href="#references">References</a></li>
-</ul></li>
+    <li class="toctree-l2"><a class="nav-item" href="../../maths/derivatives/">Matrix Derivative</a></li>
+    <li class="toctree-l2"><a class="nav-item" href="../../maths/SVD/">SVD</a></li>
 </ul></li>
                     <li class="toctree-l1"><button class="section nav-item">Assignments</button>
 <ul class="subnav">
@@ -82,8 +83,8 @@
                 </ul>
             </nav>
             <div class="repo">
-    <div class="previous"><a href="../derivatives/">&laquo; Previous</a></div>
-    <div class="next"><a href="../../assignments/a1/exploring_word_vectors.html">Next &raquo;</a></div>
+    <div class="previous"><a href="../transformer/">&laquo; Previous</a></div>
+    <div class="next"><a href="../../maths/derivatives/">Next &raquo;</a></div>
 </div>
         </aside>
         <div id="spacer"><button class="arrow"></button></div>
@@ -95,17 +96,51 @@
             <div id="main">
                 <nav class="breadcrumbs">
 <ul>
-    <li>Math</li>
+    <li>Chapters</li>
 </ul>
 </nav>
-                <div id="content"><h1 id="svd-reduced-svd-truncated-svd">SVD, reduced SVD, truncated SVD</h1>
-<h2 id="references">References</h2>
-<p>[1] Very illuminating: <a href="https://math.stackexchange.com/a/2627161">https://math.stackexchange.com/a/2627161</a><br />
-[2] <a href="https://math.mit.edu/classes/18.095/2016IAP/lec2/SVD_Notes.pdf">https://math.mit.edu/classes/18.095/2016IAP/lec2/SVD_Notes.pdf</a></p></div>
+                <div id="content"><h1 id="pretraining">Pretraining</h1>
+<h2 id="1-the-pretraining-finetuning-paradigm">1. The Pretraining / Finetuning Paradigm</h2>
+<p>Pretraining can improve NLP applicatios by serving as parameter initialization.</p>
+<p><img alt="pretrain" src="../imgs/pretrain.png" style="height:70%;width:70%;align:center" /> </p>
+<h2 id="2-model-pretraining-three-ways">2. Model Pretraining Three Ways</h2>
+<p>The neural architecture influences the type of pretraining, and natural use cases.</p>
+<p><img alt="threeWays" src="../imgs/threeWays.png" style="height:70%;width:70%;align:center" /> </p>
+<h3 id="generative-pretrained-transformer-gpt">Generative Pretrained Transformer (GPT)</h3>
+<p>2018's GPT was a big success in pretraining a decoder.</p>
+<ul>
+<li>Transfomer decoder with 12 layers.  </li>
+<li>768-dimensional hidden states, 3072-dimensional feed-forward hidden layers.  </li>
+<li>Byte-pair encoding with 40,000 merges.  </li>
+<li>Trained on BooksCorpus: over 7000 unique books. </li>
+</ul>
+<h3 id="bert-bidirectional-encoder-representations-from-transfomers">BERT: Bidirectional Encoder Representations FROM Transfomers.</h3>
+<p><img alt="bert" src="../imgs/bert.png" style="height:70%;width:70%;align:center" /> </p>
+<p>Details about BERT</p>
+<ul>
+<li>Two models were released: <ul>
+<li>BERT-base: 12 layers, 768-dim hidden states, 12 attention heads,110 million params.</li>
+<li>BERT-large: 24 layers, 1024-dim hidden states, 16 attention heads, 340 million params.</li>
+</ul>
+</li>
+<li>Trained on:<ul>
+<li>BooksCorpus(800 million words)</li>
+<li>English Wikipedia(2,500 million words)</li>
+</ul>
+</li>
+<li>Pretraining is expensive and impractical on a single GPU<ul>
+<li>BERT was pretrained with 64 TPU chips for a total of 4 days.</li>
+</ul>
+</li>
+<li>Finetuning is practical and common on a single GPU<ul>
+<li>"Pretrain once, finetune many times."</li>
+</ul>
+</li>
+</ul></div>
                 <footer>
     <div class="footer-buttons">
-        <div class="previous"><a href="../derivatives/" title="Matrix Derivative"><span>Previous</span></a></div>
-        <div class="next"><a href="../../assignments/a1/exploring_word_vectors.html" title="Assignment 1"><span>Next</span></a></div>
+        <div class="previous"><a href="../transformer/" title="Transformers"><span>Previous</span></a></div>
+        <div class="next"><a href="../../maths/derivatives/" title="Matrix Derivative"><span>Next</span></a></div>
     </div>
     <div class="footer-note">
         <p>

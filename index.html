@@ -59,6 +59,13 @@
     <li class="toctree-l3"><a class="nav-item" href="chapters/LanguageModels/LSTM/">LSTM</a></li>
     <li class="toctree-l3"><a class="nav-item" href="chapters/LanguageModels/Summary/">Summary</a></li>
 </ul></li>
+    <li class="toctree-l2"><button class="section nav-item hide">Neural Machine Translation</button>
+<ul class="subnav hide">
+    <li class="toctree-l3"><a class="nav-item" href="chapters/NMT/seq2seq/">Seq2Seq</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="chapters/NMT/atten/">Attention</a></li>
+</ul></li>
+    <li class="toctree-l2"><a class="nav-item" href="chapters/transformer/">Transformers</a></li>
+    <li class="toctree-l2"><a class="nav-item" href="chapters/Pretraining/">Pretraining</a></li>
 </ul></li>
                     <li class="toctree-l1"><button class="section nav-item">Math</button>
 <ul class="subnav">
@@ -72,6 +79,7 @@
     <li class="toctree-l2"><a class="nav-item" href="assignments/a2/a2/">Assignment 2</a></li>
     <li class="toctree-l2"><a class="nav-item" href="assignments/a3/a3/">Assignment 3</a></li>
     <li class="toctree-l2"><a class="nav-item" href="assignments/a4/a4/">Assignment 4</a></li>
+    <li class="toctree-l2"><a class="nav-item" href="assignments/a5/a5/">Assignment 5</a></li>
 </ul></li>
                 </ul>
             </nav>
@@ -91,22 +99,62 @@
     
 </ul>
 </nav>
-                <div id="content"><h1 id="cs224n">CS224n</h1>
+                <div id="content"><style>
+body {
+  background-image: url('https://miro.medium.com/max/1838/1*HpKh-MGZIq-GyRAiqEUnSw.png');
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: 60%;
+  background-attachment: fixed
+}
+</style>
+
+<h1 id="cs224n">CS224n</h1>
 <p>Some of the important concepts, formulas, derivations, assignments, and models encountered during my self-study of <a href="http://web.stanford.edu/class/cs224n/">CS224n: Natural Language Processing with Deep Learning</a> will be recorded here.</p>
 <h2 id="layouts">Layouts</h2>
 <ul>
-<li><code>mkdocs new [dir-name]</code> - Create a new project.</li>
-<li><code>mkdocs serve</code> - Start the live-reloading docs server.</li>
-<li><code>mkdocs build</code> - Build the documentation site.</li>
-<li><code>Assignments</code> - five assignments through the course.<ol>
-<li><a href="assignments/a1/exploring_word_vectors.html">Assignment 1 : Introduction to word vectors</a></li>
-</ol>
+<li><a href=".">Home</a></li>
+<li>Chapters:<ul>
+<li>Word Embeddings:<ul>
+<li><a href="chapters/Embedding/Word2vec/">Word2vec</a></li>
+<li><a href="chapters/Embedding/GloVe/">GloVe</a></li>
+</ul>
+</li>
+<li>Language Models:<ul>
+<li><a href="chapters/LanguageModels/languageModels/">Language Models</a></li>
+<li><a href="chapters/LanguageModels/RNN/">RNN</a></li>
+<li><a href="chapters/LanguageModels/LSTM/">LSTM</a></li>
+<li><a href="chapters/LanguageModels/Summary/">Summary</a></li>
+</ul>
+</li>
+<li>Neural Machine Translation: <ul>
+<li><a href="chapters/NMT/seq2seq/">Seq2Seq</a></li>
+<li><a href="chapters/NMT/atten/">Attention</a></li>
+</ul>
+</li>
+<li><a href="chapters/transformer/">Transformers</a></li>
+<li><a href="chapters/Pretraining/">Pretraining</a></li>
+</ul>
+</li>
+<li>Math: <ul>
+<li><a href="maths/derivatives/">Matrix Derivative</a></li>
+<li><a href="maths/SVD/">SVD</a></li>
+</ul>
+</li>
+<li>Assignments:<ul>
+<li><a href="assignments/a1/exploring_word_vectors.html">Assignment 1</a></li>
+<li><a href="assignments/a2/a2/">Assignment 2</a></li>
+<li><a href="assignments/a3/a3/">Assignment 3</a></li>
+<li><a href="assignments/a4/a4/">Assignment 4</a></li>
+<li><a href="assignments/a5/a5/">Assignment 5</a></li>
+</ul>
 </li>
 </ul>
 <h2 id="references">References:</h2>
 <ol>
 <li>Dan Jurafsky and James H. Martin. <a href="https://web.stanford.edu/~jurafsky/slp3/">Speech and Language Processing (3rd ed. draft)</a></li>
 <li>Zhang, Aston and Lipton, Zachary C. and Li, Mu and Smola, Alexander J. <a href="https://zh.d2l.ai/">Dive into Deep Learning</a></li>
+<li><a href="http://web.stanford.edu/class/cs224n/">CS224n: Natural Language Processing with Deep Learning</a></li>
 </ol></div>
                 <footer>
     <div class="footer-buttons">

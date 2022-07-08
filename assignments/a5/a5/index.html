@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <title>Assignment 5 &mdash; CS224n</title>
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/fira_code.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/v4-shims.css">
+    <link rel="stylesheet" href="../../../css/theme.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script> 
+</head>
+
+<body ontouchstart="">
+    <div id="container">
+        <aside>
+            <div class="home">
+                <div class="title">
+                    <button class="hamburger"></button>
+                    <a href="../../.." class="site-name"> CS224n</a>
+                </div>
+                <div class="search">
+                    <div role="search">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+        <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+    </form>
+</div>
+                </div>
+            </div>
+            <nav class="nav">
+                <ul class="root">
+                    <li class="toctree-l1"><a class="nav-item" href="../../..">Home</a></li>
+                    <li class="toctree-l1"><button class="section nav-item">Chapters</button>
+<ul class="subnav">
+    <li class="toctree-l2"><button class="section nav-item hide">Word Embeddings</button>
+<ul class="subnav hide">
+    <li class="toctree-l3"><a class="nav-item" href="../../../chapters/Embedding/Word2vec/">Word2vec</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../../chapters/Embedding/GloVe/">GloVe</a></li>
+</ul></li>
+    <li class="toctree-l2"><button class="section nav-item hide">Language Models</button>
+<ul class="subnav hide">
+    <li class="toctree-l3"><a class="nav-item" href="../../../chapters/LanguageModels/languageModels/">Language Models</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../../chapters/LanguageModels/RNN/">RNN</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../../chapters/LanguageModels/LSTM/">LSTM</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../../chapters/LanguageModels/Summary/">Summary</a></li>
+</ul></li>
+    <li class="toctree-l2"><button class="section nav-item hide">Neural Machine Translation</button>
+<ul class="subnav hide">
+    <li class="toctree-l3"><a class="nav-item" href="../../../chapters/NMT/seq2seq/">Seq2Seq</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../../chapters/NMT/atten/">Attention</a></li>
+</ul></li>
+    <li class="toctree-l2"><a class="nav-item" href="../../../chapters/transformer/">Transformers</a></li>
+    <li class="toctree-l2"><a class="nav-item" href="../../../chapters/Pretraining/">Pretraining</a></li>
+</ul></li>
+                    <li class="toctree-l1"><button class="section nav-item">Math</button>
+<ul class="subnav">
+    <li class="toctree-l2"><a class="nav-item" href="../../../maths/derivatives/">Matrix Derivative</a></li>
+    <li class="toctree-l2"><a class="nav-item" href="../../../maths/SVD/">SVD</a></li>
+</ul></li>
+                    <li class="toctree-l1"><button class="section nav-item">Assignments</button>
+<ul class="subnav">
+    <li class="toctree-l2">
+<a class="nav-item" href="../../a1/exploring_word_vectors.html">Assignment 1</a></li>
+    <li class="toctree-l2"><a class="nav-item" href="../../a2/a2/">Assignment 2</a></li>
+    <li class="toctree-l2"><a class="nav-item" href="../../a3/a3/">Assignment 3</a></li>
+    <li class="toctree-l2"><a class="nav-item" href="../../a4/a4/">Assignment 4</a></li>
+    <li class="toctree-l2 current"><a class="nav-item current" href="./">Assignment 5</a>
+<ul class="subnav">
+<li class="toctree-l3"><a class="nav-item toc" href="#1-attention-exploration">1. Attention Exploration</a></li>
+<li class="toctree-l3"><a class="nav-item toc" href="#2-pretrained-transformer-models-and-knowledge-access">2. Pretrained Transformer models and knowledge access</a></li>
+</ul></li>
+</ul></li>
+                </ul>
+            </nav>
+            <div class="repo">
+    <div class="previous"><a href="../../a4/a4/">&laquo; Previous</a></div>
+</div>
+        </aside>
+        <div id="spacer"><button class="arrow"></button></div>
+        <main>
+            <div class="home-top">
+                <button class="hamburger"></button>
+                <a href="../../.." class="site-name"> CS224n</a>
+            </div>
+            <div id="main">
+                <nav class="breadcrumbs">
+<ul>
+    <li>Assignments</li>
+</ul>
+</nav>
+                <div id="content"><h1 id="assignment-5">Assignment 5</h1>
+<p>Handout: <a href="http://web.stanford.edu/class/cs224n/assignments/a5.pdf" target="_blank">CS 224N: Assignment 5: Self-Attention, Transformers, and Pretraining</a></p>
+<h2 id="1-attention-exploration">1. Attention Exploration</h2>
+<h3 id="a-copying-in-attention">(a). Copying in attention</h3>
+<h4 id="i">i.</h4>
+<p><span class="arithmatex">\(\alpha\)</span> is calculating the softmax of <span class="arithmatex">\(k_i^T q\)</span> which makes it like a categorical probability distribution.  </p>
+<h4 id="ii">ii.</h4>
+<p>To make <span class="arithmatex">\(\alpha_j \gg \sum_{i \neq j} \alpha_i\)</span> for some <span class="arithmatex">\(j\)</span>. <span class="arithmatex">\(k_j^T q \gg k_i^T q, \forall i\neq j\)</span> is required.</p>
+<h4 id="iii">iii.</h4>
+<p>under conditions give in ii. <span class="arithmatex">\(c\approx v_j\)</span></p>
+<h4 id="iv">iv.</h4>
+<p>Intuitively, the larger <span class="arithmatex">\(\alpha_i\)</span> is, the higher attention is given on <span class="arithmatex">\(v_i\)</span> in the output <span class="arithmatex">\(c\)</span>.</p>
+<h3 id="b-an-average-of-two">(b). An average of two</h3>
+<h4 id="i_1">i.</h4>
+<p>Let 
+$$
+M=\left[\begin{array}{c}
+a_{1}^{\top} \\
+\vdots \\
+a_{m}^{\top}
+\end{array}\right]
+$$
+then, <span class="arithmatex">\(Ms = M(v_a+v_b)=v_a\)</span></p>
+<h4 id="ii_1">ii.</h4>
+<div class="arithmatex">\[
+q = \beta(k_a+k_b), \beta \gg 0 \Longrightarrow k_a^T q= \beta, k_b^T q = \beta \Longrightarrow c\approx \frac{1}{2}(v_a+v_b)
+\]</div>
+<h3 id="c-drawbacks-of-single-headed-attention">(c). Drawbacks of single-headed attention</h3>
+<h4 id="i_2">i.</h4>
+<p>Since the variance is small, we can treat <span class="arithmatex">\(k_i\)</span> as concentrating around <span class="arithmatex">\(\mu_i\)</span>, so
+$$
+q=\beta(\mu_a+\mu_b), \beta\gg 0
+$$</p>
+<h4 id="ii_2">ii.</h4>
+<p>As the figures shows, <span class="arithmatex">\(k_a\)</span> might ahve larger or smaller magnitude comparing with <span class="arithmatex">\(\mu_a\)</span>. To make an estimation, we can assume <span class="arithmatex">\(k_a\approx \gamma \mu_a, \gamma \sim N(1, \frac{1}{2})\)</span>, so
+$$
+c \approx \frac{\exp (\gamma \beta)}{\exp (\gamma \beta)+\exp (\beta)} v_{a}+\frac{\exp (\beta)}{\exp (\gamma \beta)+\exp (\beta)} v_{b} =\frac{1}{\exp ((1-\gamma) \beta)+1} v_{a}+\frac{1}{\exp ((\gamma-1) \beta)+1} v_{b}
+$$
+i.e. <span class="arithmatex">\(c\)</span> will oscillates between <span class="arithmatex">\(v_a\)</span> and <span class="arithmatex">\(v_b\)</span> as sampling <span class="arithmatex">\({k_1, k_2, ..., k_n}\)</span> multiple times.</p>
+<h3 id="d-benefits-of-multi-headed-attention">(d). Benefits of multi-headed attention</h3>
+<h4 id="i_3">i.</h4>
+<ol>
+<li><span class="arithmatex">\(q_1=q_2=\beta(\mu_a+\mu_b), \beta \gg 0\)</span>  </li>
+<li><span class="arithmatex">\(q_1 = \mu_a, q_2 = \mu_b\)</span>, or vice versa.</li>
+</ol>
+<h4 id="ii_3">ii.</h4>
+<p>Under two circumstances in i.<br />
+1. Averaging between different samples makes <span class="arithmatex">\(k_a\)</span> closer to its expectation <span class="arithmatex">\(\mu_a\)</span>, the result is that <span class="arithmatex">\(c\)</span> is closer to <span class="arithmatex">\(\frac{1}{2}(v_a+v_b)\)</span>.<br />
+2. <span class="arithmatex">\(c\)</span> is always approximately <span class="arithmatex">\(\frac{1}{2}(v_a+v_b)\)</span>, exactly when <span class="arithmatex">\(\alpha=0\)</span>.</p>
+<h2 id="2-pretrained-transformer-models-and-knowledge-access">2. Pretrained Transformer models and knowledge access</h2>
+<p>Implementation: <a href="../a5">Assignment 5 Code</a></p>
+<h3 id="d">(d).</h3>
+<table>
+<thead>
+<tr>
+<th align="center">dev set accuracy</th>
+<th align="center">all "London" accuracy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">1.6%</td>
+<td align="center">5.0%</td>
+</tr>
+</tbody>
+</table>
+<h3 id="e">(e).</h3>
+<table>
+<thead>
+<tr>
+<th align="center">dev accuracy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">27.6%</td>
+</tr>
+</tbody>
+</table>
+<h3 id="g-sythesize-variant">(g). sythesize variant</h3>
+<h4 id="i_4">i.</h4>
+<table>
+<thead>
+<tr>
+<th align="center">dev accuracy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">23.2%</td>
+</tr>
+</tbody>
+</table>
+<h4 id="ii_4">ii.</h4>
+<p>The single sythesizer can't capture the inter-dimension relative importance.</p></div>
+                <footer>
+    <div class="footer-buttons">
+        <div class="previous"><a href="../../a4/a4/" title="Assignment 4"><span>Previous</span></a></div>
+    </div>
+    <div class="footer-note">
+        <p>
+            Built with <a href="http://www.mkdocs.org">MkDocs</a> using
+            <a href="https://github.com/daizutabi/mkdocs-ivory">Ivory theme</a>.
+        </p>
+    </div>
+</footer>
+            </div>
+        </main>
+    </div>
+    <script>var base_url = '../../..';</script>
+    <script src="../../../js/theme.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../../javascripts/mathjax.js"></script>
+    <script src="../../../search/main.js"></script>
+</body>
+
+</html>

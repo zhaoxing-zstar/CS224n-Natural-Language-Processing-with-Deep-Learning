@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../../../img/favicon.ico">
-    <title>Summary &mdash; CS224n</title>
+    <title>Attention &mdash; CS224n</title>
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/fira_code.css">
     <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/all.css">
@@ -47,20 +47,21 @@
     <li class="toctree-l3"><a class="nav-item" href="../../Embedding/Word2vec/">Word2vec</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../../Embedding/GloVe/">GloVe</a></li>
 </ul></li>
-    <li class="toctree-l2 current"><button class="section nav-item">Language Models</button>
-<ul class="subnav">
-    <li class="toctree-l3"><a class="nav-item" href="../languageModels/">Language Models</a></li>
-    <li class="toctree-l3"><a class="nav-item" href="../RNN/">RNN</a></li>
-    <li class="toctree-l3"><a class="nav-item" href="../LSTM/">LSTM</a></li>
-    <li class="toctree-l3 current"><a class="nav-item current" href="./">Summary</a>
-<ul class="subnav">
-<li class="toctree-l4"><a class="nav-item toc" href="#practical-takeaways">Practical Takeaways</a></li>
-</ul></li>
-</ul></li>
-    <li class="toctree-l2"><button class="section nav-item hide">Neural Machine Translation</button>
+    <li class="toctree-l2"><button class="section nav-item hide">Language Models</button>
 <ul class="subnav hide">
-    <li class="toctree-l3"><a class="nav-item" href="../../NMT/seq2seq/">Seq2Seq</a></li>
-    <li class="toctree-l3"><a class="nav-item" href="../../NMT/atten/">Attention</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../LanguageModels/languageModels/">Language Models</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../LanguageModels/RNN/">RNN</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../LanguageModels/LSTM/">LSTM</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../LanguageModels/Summary/">Summary</a></li>
+</ul></li>
+    <li class="toctree-l2 current"><button class="section nav-item">Neural Machine Translation</button>
+<ul class="subnav">
+    <li class="toctree-l3"><a class="nav-item" href="../seq2seq/">Seq2Seq</a></li>
+    <li class="toctree-l3 current"><a class="nav-item current" href="./">Attention</a>
+<ul class="subnav">
+<li class="toctree-l4"><a class="nav-item toc" href="#1-sequence-to-sequence-the-bottleneck-problem">1. Sequence-to-sequence: the bottleneck problem</a></li>
+<li class="toctree-l4"><a class="nav-item toc" href="#2-sequence-to-sequence-with-attention">2. Sequence-to-sequence with attention</a></li>
+</ul></li>
 </ul></li>
     <li class="toctree-l2"><a class="nav-item" href="../../transformer/">Transformers</a></li>
     <li class="toctree-l2"><a class="nav-item" href="../../Pretraining/">Pretraining</a></li>
@@ -82,8 +83,8 @@
                 </ul>
             </nav>
             <div class="repo">
-    <div class="previous"><a href="../LSTM/">&laquo; Previous</a></div>
-    <div class="next"><a href="../../NMT/seq2seq/">Next &raquo;</a></div>
+    <div class="previous"><a href="../seq2seq/">&laquo; Previous</a></div>
+    <div class="next"><a href="../../transformer/">Next &raquo;</a></div>
 </div>
         </aside>
         <div id="spacer"><button class="arrow"></button></div>
@@ -95,16 +96,39 @@
             <div id="main">
                 <nav class="breadcrumbs">
 <ul>
-    <li>Chapters &raquo; </li><li>Language Models</li>
+    <li>Chapters &raquo; </li><li>Neural Machine Translation</li>
 </ul>
 </nav>
-                <div id="content"><h1 id="summary">Summary</h1>
-<h2 id="practical-takeaways">Practical Takeaways</h2>
-<p><img alt="Takeaways" src="../../imgs/LMsummary.png" /></p></div>
+                <div id="content"><h1 id="attention">Attention</h1>
+<h2 id="1-sequence-to-sequence-the-bottleneck-problem">1. Sequence-to-sequence: the bottleneck problem</h2>
+<p><img alt="bottleneck" src="../../imgs/bottleneck.png" style="height:50%;width:50%;align:center" /></p>
+<h2 id="2-sequence-to-sequence-with-attention">2. Sequence-to-sequence with attention</h2>
+<h3 id="architecture">Architecture</h3>
+<p><img alt="attention" src="../../imgs/attention.png" style="height:50%;width:50%;align:center" /></p>
+<h3 id="equations">Equations</h3>
+<p><img alt="attenEq" src="../../imgs/attenEq.png" style="height:50%;width:50%;align:center" /></p>
+<h3 id="benefits"><span style="color:green">Benefits</span></h3>
+<ul>
+<li>Attention significantly improves NMT performance  </li>
+<li>Attention provides more "human-like" model of the MT process  </li>
+<li>Attention solves the bottleneck problem</li>
+<li>Attention helps with vanishing gradient problem  </li>
+<li>Attention provides some interpretability  </li>
+</ul>
+<h3 id="attention-variants">Attention Variants</h3>
+<p>There are several ways you can compute <span class="arithmatex">\(\mathbf{e}\in \mathbb{R}^N\)</span>, from <span class="arithmatex">\(\mathbf{h_1}, \mathbf{h_2},..., \mathbf{h_N} \in \mathbb{R}^{d1}\)</span> and <span class="arithmatex">\(\mathbf{s}\in \mathbb{R}^{d_2}\)</span>:</p>
+<ul>
+<li><u>Basic dot-product attention</u>: <span class="arithmatex">\(\mathbf{e}_{t,i} = \mathbf{s}^{T}_{t}\mathbf{h}_{i}\in \mathbb{R}\)</span>  </li>
+<li><u>Multiplicative attention</u>: <span class="arithmatex">\(\mathbf{e}_{t,i} = \mathbf{s}^{T}_{t}\mathbf{W}\mathbf{h}_{i} \in \mathbb{R}\)</span>  </li>
+<li><u>Reduced-rank multiplicative attention</u>: <span class="arithmatex">\(e_i = s^T(\mathbf{U^T}\mathbf{V})h_i = (\mathbf{U}s)^T (\mathbf{V}h_i)\)</span>  </li>
+<li><u>Additive attention</u>: <span class="arithmatex">\(\mathbf{e}_{t,i} = \mathbf{v}^{T}tanh(\mathbf{W}_{1}\mathbf{h}_{i}+ \mathbf{W}_{2}\mathbf{s}_{t})\)</span></li>
+</ul>
+<h3 id="more-general-definition-of-attention"><span style="color:blue">More general definition of attention</span></h3>
+<p>Given a set of vector values, and a vector query, attention is a technique to compute a weighted sum of the values, dependent on the query.</p></div>
                 <footer>
     <div class="footer-buttons">
-        <div class="previous"><a href="../LSTM/" title="LSTM"><span>Previous</span></a></div>
-        <div class="next"><a href="../../NMT/seq2seq/" title="Seq2Seq"><span>Next</span></a></div>
+        <div class="previous"><a href="../seq2seq/" title="Seq2Seq"><span>Previous</span></a></div>
+        <div class="next"><a href="../../transformer/" title="Transformers"><span>Next</span></a></div>
     </div>
     <div class="footer-note">
         <p>

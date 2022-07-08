@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../../../img/favicon.ico">
-    <title>Summary &mdash; CS224n</title>
+    <title>Seq2Seq &mdash; CS224n</title>
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/fira_code.css">
     <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/all.css">
@@ -47,20 +47,21 @@
     <li class="toctree-l3"><a class="nav-item" href="../../Embedding/Word2vec/">Word2vec</a></li>
     <li class="toctree-l3"><a class="nav-item" href="../../Embedding/GloVe/">GloVe</a></li>
 </ul></li>
-    <li class="toctree-l2 current"><button class="section nav-item">Language Models</button>
-<ul class="subnav">
-    <li class="toctree-l3"><a class="nav-item" href="../languageModels/">Language Models</a></li>
-    <li class="toctree-l3"><a class="nav-item" href="../RNN/">RNN</a></li>
-    <li class="toctree-l3"><a class="nav-item" href="../LSTM/">LSTM</a></li>
-    <li class="toctree-l3 current"><a class="nav-item current" href="./">Summary</a>
-<ul class="subnav">
-<li class="toctree-l4"><a class="nav-item toc" href="#practical-takeaways">Practical Takeaways</a></li>
-</ul></li>
-</ul></li>
-    <li class="toctree-l2"><button class="section nav-item hide">Neural Machine Translation</button>
+    <li class="toctree-l2"><button class="section nav-item hide">Language Models</button>
 <ul class="subnav hide">
-    <li class="toctree-l3"><a class="nav-item" href="../../NMT/seq2seq/">Seq2Seq</a></li>
-    <li class="toctree-l3"><a class="nav-item" href="../../NMT/atten/">Attention</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../LanguageModels/languageModels/">Language Models</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../LanguageModels/RNN/">RNN</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../LanguageModels/LSTM/">LSTM</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../LanguageModels/Summary/">Summary</a></li>
+</ul></li>
+    <li class="toctree-l2 current"><button class="section nav-item">Neural Machine Translation</button>
+<ul class="subnav">
+    <li class="toctree-l3 current"><a class="nav-item current" href="./">Seq2Seq</a>
+<ul class="subnav">
+<li class="toctree-l4"><a class="nav-item toc" href="#1-seq2seq-model">1. Seq2seq Model</a></li>
+<li class="toctree-l4"><a class="nav-item toc" href="#2-multi-layer-rnns">2. Multi-layer RNNs</a></li>
+</ul></li>
+    <li class="toctree-l3"><a class="nav-item" href="../atten/">Attention</a></li>
 </ul></li>
     <li class="toctree-l2"><a class="nav-item" href="../../transformer/">Transformers</a></li>
     <li class="toctree-l2"><a class="nav-item" href="../../Pretraining/">Pretraining</a></li>
@@ -82,8 +83,8 @@
                 </ul>
             </nav>
             <div class="repo">
-    <div class="previous"><a href="../LSTM/">&laquo; Previous</a></div>
-    <div class="next"><a href="../../NMT/seq2seq/">Next &raquo;</a></div>
+    <div class="previous"><a href="../../LanguageModels/Summary/">&laquo; Previous</a></div>
+    <div class="next"><a href="../atten/">Next &raquo;</a></div>
 </div>
         </aside>
         <div id="spacer"><button class="arrow"></button></div>
@@ -95,16 +96,31 @@
             <div id="main">
                 <nav class="breadcrumbs">
 <ul>
-    <li>Chapters &raquo; </li><li>Language Models</li>
+    <li>Chapters &raquo; </li><li>Neural Machine Translation</li>
 </ul>
 </nav>
-                <div id="content"><h1 id="summary">Summary</h1>
-<h2 id="practical-takeaways">Practical Takeaways</h2>
-<p><img alt="Takeaways" src="../../imgs/LMsummary.png" /></p></div>
+                <div id="content"><h1 id="nmt">NMT</h1>
+<h2 id="1-seq2seq-model">1. Seq2seq Model</h2>
+<p><img alt="seq2seq" src="../../imgs/seq2seq.png" style="height:50%;width:50%;align:center" /></p>
+<p>The general notion herer is an <span style="color:green">encoder-decoder</span> model </p>
+<ul>
+<li>One neural network takes input and produces a neural representation.  </li>
+<li>Another network produces output based on that neural representation.  </li>
+<li>If the input and output are sequences, we call it a seq2seq model.  </li>
+</ul>
+<p>Many NLP tasks can be phrased as sequence-to-sequence:</p>
+<ul>
+<li><span style="color:pink">Summarization</span> (Longtext -&gt; short text)</li>
+<li><span style="color:pink">Dialogue</span> (previous utterances -&gt; next utterance)</li>
+<li><span style="color:pink">Parsing</span> (input text -&gt; output parse as a sequences)</li>
+<li><span style="color:pink">Code generation</span> (natural language -&gt; Python code)</li>
+</ul>
+<h2 id="2-multi-layer-rnns">2. Multi-layer RNNs</h2>
+<p><img alt="multiLayerRNN" src="../../imgs/multilayerRNN.png" style="height:50%;width:50%;align:center" /></p></div>
                 <footer>
     <div class="footer-buttons">
-        <div class="previous"><a href="../LSTM/" title="LSTM"><span>Previous</span></a></div>
-        <div class="next"><a href="../../NMT/seq2seq/" title="Seq2Seq"><span>Next</span></a></div>
+        <div class="previous"><a href="../../LanguageModels/Summary/" title="Summary"><span>Previous</span></a></div>
+        <div class="next"><a href="../atten/" title="Attention"><span>Next</span></a></div>
     </div>
     <div class="footer-note">
         <p>
